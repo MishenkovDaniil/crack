@@ -64,27 +64,26 @@ int crack ()
 
 int sf_crack ()
 {
-    sf::RenderWindow window(sf::VideoMode (280,320), "CRACKING...");
-    
-    FILE *gif_file = stbi__fopen ("for_crack.gif", "rb");
-
     int width  = 280;
     int height = 320;
     int frame_num = 0;
     int comp_mod = 0; 
     int *delays = (int *)calloc (1, sizeof (int));
     
-    stbi__context s = {};
-    stbi__start_file (&s, gif_file);
-
-    void *gif_parsed = stbi__load_gif_main (&s, &delays, &width, &height, &frame_num, &comp_mod, STBI_rgb_alpha);
-
     sf::Music music;
     music.openFromFile ("new_order.ogg");
 
     music.setVolume (100);
     music.play ();
 
+    sf::RenderWindow window(sf::VideoMode (width,height), "CRACKING...");
+
+    FILE *gif_file = stbi__fopen ("for_crack.gif", "rb");
+    assert (gif_file);    
+    stbi__context s = {};
+    stbi__start_file (&s, gif_file);
+
+    void *gif_parsed = stbi__load_gif_main (&s, &delays, &width, &height, &frame_num, &comp_mod, STBI_rgb_alpha);
 
     while (window.isOpen ())
     {
@@ -122,6 +121,7 @@ int sf_crack ()
     music.stop ();
 
     free (delays);
+    free (gif_parsed);
     fclose (gif_file);
 
     return EXIT_SUCCESS;
