@@ -66,7 +66,7 @@ int sf_crack ()
 {
     sf::RenderWindow window(sf::VideoMode (280,320), "CRACKING...");
     
-    FILE *gif_file = stbi__fopen ("ha-hai.gif", "rb");
+    FILE *gif_file = stbi__fopen ("for_crack.gif", "rb");
 
     int width  = 280;
     int height = 320;
